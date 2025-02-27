@@ -1,0 +1,26 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { ABOUT } from "@consts";
+---
+
+<PageLayout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate font-semibold text-black dark:text-white">
+        About Me
+      </div>
+      <article class="animate space-y-4">
+        <p>
+          Hello! I'm Aashish Manchanda, a passionate developer with a love for creating minimal, SEO-friendly, and accessible web applications. 
+        </p>
+        <p>
+          I have experience in various web technologies and enjoy working on projects that make a positive impact. 
+        </p>
+        <p>
+          Feel free to explore my work and get in touch if you'd like to collaborate or just say hi!
+        </p>
+      </article>
+    </div>
+  </Container>
+</PageLayout>
