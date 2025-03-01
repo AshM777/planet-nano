@@ -32,44 +32,38 @@ const work = await Promise.all(
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Aashish Manchanda <span class="text-xl">👋🏻</span> 
-    </h4>
+    <h3 class="animate font-semibold text-black dark:text-white">
+      <img src="/public/AashishProfile-modified.png" alt="Aashish Manchanda" style="width: 120px; height: auto; border: 1px solid; border-radius: 8px; margin-bottom: 10px;" />
+      hi, I'm aashish manchanda <span class="text-xl">👋🏻</span> 
+    </h3>
     <div class="space-y-16">
       <section>
-        <article class="space-y-4">
-          <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for developers. 
-            I am an even more lightweight version of my popular theme
-            <Link href="https://github.com/markhorn-dev/astro-sphere" aria-label="Astro Sphere on Github" external>
-              Astro Sphere
-            </Link>.
-            I have a lighthouse scores of 100 across the board for performance, 
-            accesibility, best practices and SEO.
-          </p>
-          <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed, markdown 
-            and mdx support (use components in your markdown) through astro integrations.
-            I am styled with tailwind and come preconfigured with light, dark and 
-            system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link href="https://github.com/markhorn-dev/astro-nano" aria-label="Astro Nano on Github" external>
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or Netlify. 
-          </p>
+      <article class="space-y-4">
+        <p class="animate font-semibold text-black dark:text-white">
+        👨‍🎨 <i class="font-semibold">UX Design Leader | Product Strategist | AI & Sustainability Enthusiast</i>
+        </p>
+        <p class="animate text-black dark:text-white">
+        from crafting seamless experiences in ed-tech, enterprise, consumer SaaS, AI agents, fintech, and web3 to leading global design teams across time zones—I’ve dabbled in (and occasionally broken) just about everything UX.
+        </p>
+        <p class="animate text-black dark:text-white">
+        currently shaping enterprise design at 
+        <Link href="https://www.cisco.com/c/en/us/products/security/artificial-intelligence-ai.html#~overview" aria-label="Cisco" external>
+          Cisco
+        </Link>, I specialize in scaling design teams, driving business impact, and blending AI with UX to create meaningful, user-centric solutions.
+        </p>
+        <p class="animate italic text-black dark:text-white">
+        <u>☕ fueled by: curiosity, coffee, and an unreasonable number of browser tabs.</u>
+        </p>
         </article>
       </section>
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
+            latest threads
           </h5>
           <Link href="/blog">
-            See all posts
+            see all posts
           </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -81,60 +75,62 @@ const work = await Promise.all(
         </ul>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-          <Link href="/work">
-            See all work
-          </Link>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map(entry => (
-            <li>
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <!--
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap gap-y-2 items-center justify-between">
+            <h5 class="font-semibold text-black dark:text-white">
+          work experience
+            </h5>
+            <Link href="/work">
+          see all work
+            </Link>
+          </div>
+          <ul class="flex flex-col space-y-4">
+            {work.map(entry => (
+          <li>
+            <div class="text-sm opacity-75">
+              {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+            </div>
+            <div class="font-semibold text-black dark:text-white">
+              {entry.data.company}
+            </div>
+            <div class="text-sm opacity-75">
+              {entry.data.role}
+            </div>
+            <article>
+              <entry.Content />
+            </article>
+          </li>
+            ))}
+          </ul>
+        </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects">
-            See all projects
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {projects.map(project => (
-            <li>
-              <ArrowCard entry={project} />
-            </li>
-          ))}
-        </ul>
-      </section>
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap gap-y-2 items-center justify-between">
+            <h5 class="font-semibold text-black dark:text-white">
+          recent projects
+            </h5>
+            <Link href="/projects">
+          see all projects
+            </Link>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {projects.map(project => (
+          <li>
+            <ArrowCard entry={project} />
+          </li>
+            ))}
+          </ul>
+        </section>
+      -->
 
       <section class="animate space-y-4">
         <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
+          let's connect
         </h5>
         <article>
           <p>
-            If you want to get in touch with me about something or just to say hi,
+            if you want to get in touch with me about something or just to say hi,
             reach out on social media or send me an email.
           </p>
         </article>
@@ -147,11 +143,13 @@ const work = await Promise.all(
               {"/"}
             </li>
           ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
+          <!--
+                <li class="line-clamp-1">
+                <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
+                  {SITE.EMAIL}
+                </Link>
+                </li>
+          -->
         </ul>
       </section>
     </div>
