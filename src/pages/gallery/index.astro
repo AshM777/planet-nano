@@ -1,0 +1,223 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { GALLERY } from "@consts";
+
+const gallery = (await getCollection("gallery"))
+  .filter(item => !item.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = [...new Set(gallery.map(item => item.data.category || 'Uncategorized'))];
+
+// Sample tweets data with proper dimensions and verified profile images
+const tweets = [
+  {
+    id: "1394650207913136129",
+    author: "Whitney Hess",
+    handle: "@whit4th",
+    avatar: "/public/tweets/whitney.jpg",
+    content: "Just explored @manchanda's portfolio - absolutely blown away by the thoughtful UX patterns and clean design systems. The way they approach enterprise design is next level! 🚀",
+    date: "May 18, 2021",
+    url: "https://twitter.com/whit4th/status/1394650207913136129",
+    size: "large", // 2x2
+  },
+  {
+    id: "1394638520988352517",
+    author: "Lamacorn",
+    handle: "@Lamacorn20",
+    avatar: "/public/tweets/lamacorn.jpg",
+    content: "The attention to detail in @manchanda's work for Cisco is impressive. Love how they balance complex enterprise needs with intuitive user experiences.",
+    date: "May 18, 2021",
+    url: "https://twitter.com/Lamacorn20/status/1394638520988352517",
+    size: "small", // 1x1
+  },
+  {
+    id: "1394626792011571202",
+    author: "Matt Hartman",
+    handle: "@MattHartman",
+    avatar: "/public/tweets/matt.jpg",
+    content: "Been following @manchanda's journey in UX leadership - their approach to scaling design teams while maintaining quality is inspiring!",
+    date: "May 18, 2021",
+    url: "https://twitter.com/MattHartman/status/1394626792011571202",
+    size: "tall", // 1x2
+  },
+  {
+    id: "1411675022146613253",
+    author: "Taras",
+    handle: "@officialtaras",
+    avatar: "/public/tweets/taras.jpg",
+    content: "Fascinating case study on how @manchanda transformed enterprise UX at Cisco. The before/after comparisons are mind-blowing! 📈",
+    date: "July 4, 2021",
+    url: "https://twitter.com/officialtaras/status/1411675022146613253",
+    size: "wide", // 2x1
+  },
+  {
+    id: "1421156967515660288",
+    author: "Whitney Hess",
+    handle: "@whit4th",
+    avatar: "/public/tweets/whitney.jpg",
+    content: "What @manchanda is doing with AI-powered UX at Cisco is groundbreaking. Love seeing enterprise software becoming more human-centered!",
+    date: "July 30, 2021",
+    url: "https://twitter.com/whit4th/status/1421156967515660288",
+    size: "small", // 1x1
+  },
+  {
+    id: "1394578620912259073",
+    author: "Pankhudi Kedia",
+    handle: "@pankhudikedia",
+    avatar: "/public/tweets/pankhudi.jpg",
+    content: "The way @manchanda combines AI with human-centered design principles is exactly what the industry needs right now.",
+    date: "May 18, 2021",
+    url: "https://twitter.com/pankhudikedia/status/1394578620912259073",
+    size: "large", // 2x2
+  },
+  {
+    id: "1397214938289119240",
+    author: "Ashutosh Shandilya",
+    handle: "@ashandilya64",
+    avatar: "/public/tweets/ashutosh.jpg",
+    content: "Attended @manchanda's workshop on scaling design systems - packed with practical insights! Their experience with global teams really shows.",
+    date: "May 25, 2021",
+    url: "https://twitter.com/ashandilya64/status/1397214938289119240",
+    size: "wide", // 2x1
+  },
+  {
+    id: "1429791219995987971",
+    author: "Aashish Manchanda",
+    handle: "@_manchanda_",
+    avatar: "/public/tweets/aashish.jpg",
+    content: "The sustainability focus in our recent projects shows how design can drive positive change. This is the future of enterprise UX! 🌱",
+    date: "Aug 23, 2021",
+    url: "https://twitter.com/_manchanda_/status/1429791219995987971",
+    size: "tall", // 1x2
+  }
+];
+
+// Helper function to get grid classes based on size
+function getGridClasses(size: string) {
+  switch (size) {
+    case 'large':
+      return 'col-span-2 row-span-2';
+    case 'wide':
+      return 'col-span-2 row-span-1';
+    case 'tall':
+      return 'col-span-1 row-span-2';
+    default:
+      return 'col-span-1 row-span-1';
+  }
+}
+---
+
+<PageLayout title={GALLERY.TITLE} description={GALLERY.DESCRIPTION}>
+  <Container>
+    <div class="space-y-16">
+      <div>
+        <div class="animate font-semibold text-black dark:text-white mb-10">
+          Gallery
+        </div>
+        <div class="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4 auto-rows-[100px]">
+          {gallery.map((item, index) => {
+            // Define different layout patterns
+            const patterns = [
+              'md:col-span-2 md:row-span-4', // Large square
+              'md:col-span-2 md:row-span-2', // Medium square
+              'md:col-span-2 md:row-span-2', // Medium square
+              'md:col-span-4 md:row-span-2', // Wide rectangle
+              'md:col-span-2 md:row-span-2', // Medium square
+              'md:col-span-2 md:row-span-2', // Medium square
+            ];
+            
+            // Get pattern based on index, cycling through patterns
+            const pattern = patterns[index % patterns.length];
+            
+            return (
+              <a 
+                href={`/gallery/${item.slug}`}
+                class={`group relative col-span-3 row-span-2 overflow-hidden rounded-xl bg-black/5 dark:bg-white/5 ${pattern}`}
+              >
+                <img 
+                  src={item.data.imageUrl} 
+                  alt={item.data.title}
+                  class="h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div class="absolute bottom-0 left-0 right-0 p-4">
+                    <div class="text-white">
+                      <div class="font-semibold line-clamp-1">{item.data.title}</div>
+                      <div class="mt-1 text-sm line-clamp-2 opacity-90">
+                        {item.data.description}
+                      </div>
+                      <div class="mt-2 text-xs opacity-75">
+                        {item.data.category}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <div class="animate font-semibold text-black dark:text-white mb-10">
+          Wall of Love
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-6xl mx-auto">
+          {tweets.map(tweet => (
+            <a 
+              href={tweet.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="animate group flex flex-col rounded-lg border border-black/5 dark:border-white/5 bg-white dark:bg-black/20 hover:border-[#1DA1F2]/30 dark:hover:border-[#1DA1F2]/30 hover:bg-[#1DA1F2]/5 dark:hover:bg-[#1DA1F2]/5 transition-all duration-300"
+            >
+              <div class="flex flex-col h-full p-3.5">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-8 h-8 rounded-full overflow-hidden ring-1 ring-black/5 dark:ring-white/10">
+                    <img 
+                      src={`https://unavatar.io/twitter/${tweet.handle.replace('@', '')}`}
+                      alt={tweet.author}
+                      class="w-full h-full object-cover"
+                      width="32"
+                      height="32"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium text-black dark:text-white truncate text-[13px]">
+                      {tweet.author}
+                    </div>
+                    <div class="text-[12px] text-black/50 dark:text-white/50 truncate">
+                      {tweet.handle}
+                    </div>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <svg class="w-[14px] h-[14px] text-[#1DA1F2] opacity-75 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1 mt-1">
+                  <p class="text-black dark:text-white text-[13px] leading-relaxed">
+                    {tweet.content}
+                  </p>
+                </div>
+                <div class="mt-2.5 pt-2.5 border-t border-black/5 dark:border-white/5">
+                  <div class="flex items-center justify-between">
+                    <div class="text-[11px] text-black/40 dark:text-white/40">
+                      {tweet.date}
+                    </div>
+                    <div class="text-[11px] text-[#1DA1F2] group-hover:text-[#1DA1F2] transition-colors">
+                      View Tweet →
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </Container>
+</PageLayout> 

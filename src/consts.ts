@@ -13,8 +13,8 @@ export const HOME: Metadata = {
   DESCRIPTION: "Aashish Manchanda, as covered in media, is a passionate product & design expert.",
 };
 
-export const BLOG: Metadata = {
-  TITLE: "Blog",
+export const THREADS: Metadata = {
+  TITLE: "Threads",
   DESCRIPTION: "A collection of articles on topics I am passionate about.",
 };
 
@@ -26,6 +26,11 @@ export const WORK: Metadata = {
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
   DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+};
+
+export const GALLERY: Metadata = {
+  TITLE: "Gallery",
+  DESCRIPTION: "A collection of visual works and designs.",
 };
 
 export const SOCIALS: Socials = [

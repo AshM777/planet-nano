@@ -5,17 +5,20 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
 import BackToPrev from "@components/BackToPrev.astro";
+import SubscribeWidget from "@components/SubscribeWidget.astro";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog"))
-    .filter(post => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return posts.map((post) => ({
+  const posts = (await getCollection("threads"))
+    .filter((post: CollectionEntry<"threads">) => !post.data.draft)
+    .sort((a: CollectionEntry<"threads">, b: CollectionEntry<"threads">) => 
+      b.data.date.valueOf() - a.data.date.valueOf()
+    );
+  return posts.map((post: CollectionEntry<"threads">) => ({
     params: { slug: post.slug },
     props: post,
   }));
 }
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"threads">;
 
 const post = Astro.props;
 const { Content } = await post.render();
@@ -24,8 +27,8 @@ const { Content } = await post.render();
 <PageLayout title={post.data.title} description={post.data.description}>
   <Container>
     <div class="animate">
-      <BackToPrev href="/blog">
-        Back to blog
+      <BackToPrev href="/threads">
+        Back to threads
       </BackToPrev>
     </div>
     <div class="space-y-1 my-10">
@@ -42,8 +45,20 @@ const { Content } = await post.render();
         {post.data.title}
       </div>
     </div>
-    <article class="animate">
+    <article class="animate prose prose-neutral dark:prose-invert mb-16">
       <Content />
     </article>
+
+    <div class="animate border-t border-black/5 dark:border-white/5 pt-16">
+      <div class="max-w-md">
+        <div class="font-medium text-black dark:text-white mb-2">
+          Subscribe to Updates
+        </div>
+        <div class="text-sm text-black/60 dark:text-white/60 mb-6">
+          Get notified when new threads are published.
+        </div>
+        <SubscribeWidget />
+      </div>
+    </div>
   </Container>
 </PageLayout>

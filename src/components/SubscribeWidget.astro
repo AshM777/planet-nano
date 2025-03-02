@@ -1,0 +1,115 @@
+---
+interface Props {
+  publication?: string; // Your Substack publication name
+}
+
+const { publication = import.meta.env.SUBSTACK_PUBLICATION } = Astro.props;
+---
+
+<form class="flex flex-col sm:flex-row gap-2">
+  <div class="flex-1">
+    <input 
+      type="email" 
+      placeholder="Enter your email" 
+      class="w-full px-4 h-10 rounded-lg bg-white dark:bg-black/20 border border-black/15 dark:border-white/20 text-sm text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all"
+      required
+    />
+  </div>
+  <button 
+    type="submit"
+    class="h-10 px-6 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white text-sm transition-colors duration-300 ease-in-out"
+  >
+    Subscribe
+  </button>
+</form>
+
+<script define:vars={{ publication }}>
+  if (!publication) {
+    console.error('Substack publication not configured. Please set SUBSTACK_PUBLICATION in your .env file.');
+  }
+
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const emailInput = form.querySelector('input[type="email"]');
+      const button = form.querySelector('button');
+      
+      if (!emailInput || !button || !(emailInput instanceof HTMLInputElement)) return;
+      
+      const email = emailInput.value;
+      button.disabled = true;
+      
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          // Show success message
+          const originalText = button.textContent || 'Subscribe';
+          button.textContent = 'Subscribed!';
+          button.classList.add('bg-green-500/10', 'border-green-500/20', 'text-green-500');
+          
+          // Reset after 2 seconds
+          setTimeout(() => {
+            if (!button) return;
+            button.textContent = originalText;
+            button.classList.remove('bg-green-500/10', 'border-green-500/20', 'text-green-500');
+            button.disabled = false;
+            form.reset();
+          }, 2000);
+        } else {
+          // Show error message
+          const originalText = button.textContent || 'Subscribe';
+          button.textContent = data.message || 'Error!';
+          button.classList.add('bg-red-500/10', 'border-red-500/20', 'text-red-500');
+          
+          // Reset after 2 seconds
+          setTimeout(() => {
+            if (!button) return;
+            button.textContent = originalText;
+            button.classList.remove('bg-red-500/10', 'border-red-500/20', 'text-red-500');
+            button.disabled = false;
+          }, 2000);
+        }
+      } catch (error) {
+        console.error('Error subscribing:', error);
+        
+        // Show error message
+        const originalText = button.textContent || 'Subscribe';
+        button.textContent = 'Error!';
+        button.classList.add('bg-red-500/10', 'border-red-500/20', 'text-red-500');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          if (!button) return;
+          button.textContent = originalText;
+          button.classList.remove('bg-red-500/10', 'border-red-500/20', 'text-red-500');
+          button.disabled = false;
+        }, 2000);
+      }
+    });
+  });
+</script>
+
+<style>
+  .subscribe-widget {
+    width: 100%;
+    max-width: 480px;
+    margin: 2rem 0;
+  }
+
+  /* Dark mode support */
+  :global(.dark) .subscribe-widget iframe {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+  }
+</style> 
