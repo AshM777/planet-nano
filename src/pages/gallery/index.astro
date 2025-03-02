@@ -8,79 +8,79 @@ const gallery = (await getCollection("gallery"))
   .filter(item => !item.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const categories = [...new Set(gallery.map(item => item.data.category || 'Uncategorized'))];
+const categories = [...new Set(gallery.map(item => item.data.category || 'uncategorized'))];
 
 // Sample tweets data with proper dimensions and verified profile images
 const tweets = [
   {
     id: "1394650207913136129",
-    author: "Whitney Hess",
+    author: "whitney hess",
     handle: "@whit4th",
-    content: "Just explored @manchanda's portfolio - absolutely blown away by the thoughtful UX patterns and clean design systems. The way they approach enterprise design is next level! 🚀",
-    date: "May 18, 2021",
+    content: "just explored @manchanda's portfolio - absolutely blown away by the thoughtful UX patterns and clean design systems. the way they approach enterprise design is next level! 🚀",
+    date: "may 18, 2021",
     url: "https://twitter.com/whit4th/status/1394650207913136129",
     size: "large", // 2x2
   },
   {
     id: "1394638520988352517",
-    author: "Lamacorn",
+    author: "lamacorn",
     handle: "@Lamacorn20",
-    content: "The attention to detail in @manchanda's work for Cisco is impressive. Love how they balance complex enterprise needs with intuitive user experiences.",
-    date: "May 18, 2021",
+    content: "the attention to detail in @manchanda's work for cisco is impressive. love how they balance complex enterprise needs with intuitive user experiences.",
+    date: "may 18, 2021",
     url: "https://twitter.com/Lamacorn20/status/1394638520988352517",
     size: "small", // 1x1
   },
   {
     id: "1394626792011571202",
-    author: "Matt Hartman",
+    author: "matt hartman",
     handle: "@MattHartman",
-    content: "Been following @manchanda's journey in UX leadership - their approach to scaling design teams while maintaining quality is inspiring!",
-    date: "May 18, 2021",
+    content: "been following @manchanda's journey in UX leadership - their approach to scaling design teams while maintaining quality is inspiring!",
+    date: "may 18, 2021",
     url: "https://twitter.com/MattHartman/status/1394626792011571202",
     size: "tall", // 1x2
   },
   {
     id: "1411675022146613253",
-    author: "Taras",
+    author: "taras",
     handle: "@officialtaras",
-    content: "Fascinating case study on how @manchanda transformed enterprise UX at Cisco. The before/after comparisons are mind-blowing! 📈",
-    date: "July 4, 2021",
+    content: "fascinating case study on how @manchanda transformed enterprise UX at cisco. the before/after comparisons are mind-blowing! 📈",
+    date: "july 4, 2021",
     url: "https://twitter.com/officialtaras/status/1411675022146613253",
     size: "wide", // 2x1
   },
   {
     id: "1421156967515660288",
-    author: "Whitney Hess",
+    author: "whitney hess",
     handle: "@whit4th",
-    content: "What @manchanda is doing with AI-powered UX at Cisco is groundbreaking. Love seeing enterprise software becoming more human-centered!",
-    date: "July 30, 2021",
+    content: "what @manchanda is doing with AI-powered UX at cisco is groundbreaking. love seeing enterprise software becoming more human-centered!",
+    date: "july 30, 2021",
     url: "https://twitter.com/whit4th/status/1421156967515660288",
     size: "small", // 1x1
   },
   {
     id: "1394578620912259073",
-    author: "Pankhudi Kedia",
+    author: "pankhudi kedia",
     handle: "@pankhudikedia",
-    content: "The way @manchanda combines AI with human-centered design principles is exactly what the industry needs right now.",
-    date: "May 18, 2021",
+    content: "the way @manchanda combines AI with human-centered design principles is exactly what the industry needs right now.",
+    date: "may 18, 2021",
     url: "https://twitter.com/pankhudikedia/status/1394578620912259073",
     size: "large", // 2x2
   },
   {
     id: "1397214938289119240",
-    author: "Ashutosh Shandilya",
+    author: "ashutosh shandilya",
     handle: "@ashandilya64",
-    content: "Attended @manchanda's workshop on scaling design systems - packed with practical insights! Their experience with global teams really shows.",
-    date: "May 25, 2021",
+    content: "attended @manchanda's workshop on scaling design systems - packed with practical insights! their experience with global teams really shows.",
+    date: "may 25, 2021",
     url: "https://twitter.com/ashandilya64/status/1397214938289119240",
     size: "wide", // 2x1
   },
   {
     id: "1429791219995987971",
-    author: "Aashish Manchanda",
+    author: "aashish manchanda",
     handle: "@_manchanda_",
-    content: "The sustainability focus in our recent projects shows how design can drive positive change. This is the future of enterprise UX! 🌱",
-    date: "Aug 23, 2021",
+    content: "the sustainability focus in our recent projects shows how design can drive positive change. this is the future of enterprise UX! 🌱",
+    date: "aug 23, 2021",
     url: "https://twitter.com/_manchanda_/status/1429791219995987971",
     size: "tall", // 1x2
   }
@@ -201,7 +201,7 @@ function getGridClasses(size: string) {
                       {tweet.date}
                     </div>
                     <div class="text-[11px] text-[#1DA1F2] group-hover:text-[#1DA1F2] transition-colors">
-                      View Tweet →
+                      view tweet →
                     </div>
                   </div>
                 </div>
