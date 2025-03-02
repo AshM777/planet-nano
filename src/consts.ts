@@ -9,13 +9,13 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "canvas",
+  TITLE: "Canvas",
   DESCRIPTION: "Aashish Manchanda, as covered in media, is a passionate product & design expert.",
 };
 
 export const THREADS: Metadata = {
-  TITLE: "Threads",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  TITLE: "threads",
+  DESCRIPTION: "a collection of articles on topics i am passionate about.",
 };
 
 export const WORK: Metadata = {

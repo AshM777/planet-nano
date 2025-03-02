@@ -1,6 +1,6 @@
 ---
-title: "Can I really code?"
-description: "Me setting up my first blog in the vs code."
+title: "can i really code?"
+description: "setting up my first blog in the vs code."
 date: "02/27/2025"
 draft: false
 ---
